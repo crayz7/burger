@@ -1,0 +1,61 @@
+<div class="container"> 
+  <div class="jumbotron">  
+    <h1>Eat Da Burger!</h1>
+  </div>
+
+  <!-- Burger list -->
+  <div class="row">
+    <div class="col-md-6">
+    <h3>Burgers to devour</h3>
+      <div class="panel-panel default">
+        <ul class="list-group">
+        {{#each burgers}}
+          {{#unless this.devoured}}
+          <li class="list-group-item">
+            <div class="input-group">
+              <p class="lead"> {{this.burger_name}} </p>
+              <span class="input-group-btn">
+                <form action="/update/{{this.id}}?_method=PUT" method="POST">
+                  <input type="hidden" name="devoured" value="true">
+                  <button class="btn btn-default btn-lg" type="submit">Scarf it down!</button>
+                </form>
+              </span>
+            </div>
+          </li>
+          {{/unless}}
+        {{/each}}
+      </ul>
+    </div>
+    </div>
+
+    <!-- Devoured burgers -->
+    <div class="col-md-6">
+     <h3>Devoured burgers</h3>
+      <div class="panel panel-default">
+        <ul class="list-group">
+        {{#each burgers}}
+          {{#if this.devoured}}
+          <li class="list-group-item">
+            <p class="lead">{{this.burger_name}} </p>
+          </li>
+          {{/if}}
+        {{/each}}
+        </ul>
+      </div>
+    </div>
+  </div>
+
+<div class="row">
+  <div class="col-md-4">
+  </div>
+  <div class="col-md-4">
+    <p class="lead">Add a new burger:</p>
+
+    <!-- Add burgers -->
+    <form action="/create" method="POST">
+      <input type="text" id="name" name="burger_name" placeholder="Type of burger">
+      <button type="submit" class="addButton">Add the burger</button>
+    </form>
+  </div>
+ </div>
+</div>
